@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Challenge - ETL / Container</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Data Analysis Results</h1>
+    <div class="result">
+        <h2>Total Number of Films</h2>
+        <p>{{ total_films }}</p>
+    </div>
+    
+    <div class="result">
+        <h2>Number of Films by Genre (Percentage)</h2>
+        <div id="genre-chart"></div>
+    </div>
+    
+    <div class="result">
+        <h2>Number of Films by Year</h2>
+        <div id="year-chart"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
