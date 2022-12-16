@@ -1,0 +1,39 @@
+version: "3"
+services:
+  data-loader:
+    build:
+      context: ./data_loader
+      dockerfile: Dockerfile
+    volumes:
+      - ./data_loader/data:/app/data
+    networks:
+      - my-network
+    depends_on:
+      - project-db
+  data-analysis:
+    build:
+      context: ./data_analysis
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data_analysis/static:/app/static
+    networks:
+      - my-network
+    depends_on:
+      - project-db
+  project-db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=movies_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
